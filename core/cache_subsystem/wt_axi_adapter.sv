@@ -159,7 +159,7 @@ module wt_axi_adapter
     end
 
     // arbiter mux
-    if (arb_idx) begin
+    if (arb_idx) begin.
       // Cast to AXI address width
       axi_rd_addr = {{CVA6Cfg.AxiAddrWidth - riscv::PLEN{1'b0}}, dcache_data.paddr};
       // If dcache_data.size MSB is set, we want to read as much as possible
@@ -515,7 +515,7 @@ module wt_axi_adapter
   always_comb begin : p_axi_rtrn_decode
     // we are not ready when invalidating
     // note: b's are buffered separately
-    axi_rd_rdy        = ~invalidate;
+    axi_rd_rdy        = ~invalidate && !invalid_valid_i;
 
     icache_rtrn_rd_en = 1'b0;
     icache_rtrn_vld_d = 1'b0;
